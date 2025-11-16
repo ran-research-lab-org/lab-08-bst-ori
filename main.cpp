@@ -9,7 +9,6 @@ using namespace std;
 TEST_CASE("BinarySearchTree basic operations") {
   BinarySearchTree<int> B;
   B.insert(10);
-
   B.insert(4);
   B.insert(2);
   B.insert(15);
@@ -18,6 +17,12 @@ TEST_CASE("BinarySearchTree basic operations") {
   B.insert(56);
   CHECK(B.toInorderStr() == "1,2,4,10,15,31,56");
   CHECK(B.BFT() == "[[10],[4,15],[2,31],[1,56]]");
+  CHECK(B.contains(10) == true);
+  CHECK(B.contains(99) == false);
+  B.remove(15);  
+  CHECK(B.toInorderStr() == "1,2,4,10,31,56");
+
+
   BinarySearchTree<int> C;
   for (auto e :
        {16, 8, 24, 28, 20, 12, 4, 2, 6, 10, 14, 18, 22, 26, 30, 15, 7, 3}) {

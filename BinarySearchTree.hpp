@@ -112,7 +112,39 @@ public:
   void remove(const Comparable &x) { remove(x, root); }
 
   string BFT() const {
-    string st;
+    //arbol vacío
+    if(isEmpty()){return "[]";}
+
+    //cola
+    queue <BinaryNode*> cola;  
+    cola.push(root);
+
+
+    string st = "[";    //incio de cola
+    
+    while(!cola.empty()){    
+      int nivelSize = cola.size();
+      st = st + "[";     //inicio de grupo
+
+
+      for(int i=0; i<nivelSize; i++){
+        BinaryNode *actual = cola.front();
+        cola.pop();
+
+        //agregar valor
+        st = st + toStr(actual -> element);
+        if (i < nivelSize - 1) {st = st + ",";} //colocar coma
+
+        //hijos
+        if(actual -> left){cola.push(actual->left);}
+        if(actual -> right){cola.push(actual->right);}
+      }
+      st = st + "]";    //cerrar grupo
+      if(!cola.empty()){st = st + ",";} //colocar coma
+    }
+
+    //cerrar cola
+    st = st + "]";
     return st;
   }
 
